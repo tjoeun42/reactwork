@@ -14,6 +14,7 @@ import { useState } from "react";
 const Counter = () => {
     // let count = 0; // 값이 변경되는 변수
     const [count, setCount] = useState(0); 
+
     return (
         <>
             <h1>{count}</h1>
