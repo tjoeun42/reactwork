@@ -1,0 +1,23 @@
+.App {
+  text-align: center;
+}
+
+.header {
+  display :flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 15vh;
+  background-color: azure;
+}
+.logo {
+  width: 150px;
+}
+section {
+  height : 65vh;
+}
+footer {
+  padding: 10px 0 5px 10px;
+  height: 20vh;
+  font-size : small;
+  background-color: azure;
+}
