@@ -24,10 +24,17 @@ function App() {
                             let copy = [...like];
                             copy[i] = copy[i] + 1;
                             setLike(copy)
-                          }}>🥇</span>{like[i]}</p>
-              <button onClick={() => {
-                splice(startIndex, 제거할 개수)
+                          }}>🥇</span>{like[i]}
+              <button className="delete" onClick={() => {
+                let copyTitle = [...title];
+                copyTitle.splice(i, 1);
+                setTitle(copyTitle);
+                
+                let copyLike = [...like];
+                copyLike.splice(i, 1);
+                setLike(copyLike);
               }}>삭제</button>
+              </p>
             </div>
           )
         }) 

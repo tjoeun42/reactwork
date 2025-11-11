@@ -19,3 +19,6 @@ span {
   padding: 5px 0 5px 20px;
   background-color: rgb(147, 164, 118);
 }
+.delete {
+  margin-left: 20px;
+}
