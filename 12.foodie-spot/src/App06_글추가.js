@@ -2,14 +2,14 @@ import './App.css';
 import {useState} from 'react';
 
 /*
-  삭제하기
+  input에 글자를 받아서 title에 추가하기
 */
 function App() {
   const [like, setLike] = useState([0,0,0]);
   let [title, setTitle] = useState(['얌샘김밥', '이향', '초밥']);
   let [modal, setModal] = useState(false);
   let [modalIndex, setModalIndex] = useState(0);
-
+  // 2. input에 들어온값 저장할 state
   let [inputValue, setInputValue] = useState('');
 
   return (
@@ -25,14 +25,13 @@ function App() {
                             copy[i] = copy[i] + 1;
                             setLike(copy)
                           }}>🥇</span>{like[i]}</p>
-              <button onClick={() => {
-                splice(startIndex, 제거할 개수)
-              }}>삭제</button>
             </div>
           )
         }) 
       }
+      {/* 1. 입력받기 */}
       <input onChange={(e)=>{setInputValue(e.target.value); /*console.log(inputValue)*/}}></input>
+      {/* 3. 글추가 버튼 */}
       <button onClick={() => {
         let ctitle = [...title];
         let clike = [...like];

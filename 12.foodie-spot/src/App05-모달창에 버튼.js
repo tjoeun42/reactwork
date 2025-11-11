@@ -1,8 +1,7 @@
 import './App.css';
 import {useState} from 'react';
-
 /*
-  삭제하기
+  버튼을 모달창에서 사용
 */
 function App() {
   const [like, setLike] = useState([0,0,0]);
@@ -10,11 +9,12 @@ function App() {
   let [modal, setModal] = useState(false);
   let [modalIndex, setModalIndex] = useState(0);
 
-  let [inputValue, setInputValue] = useState('');
-
   return (
     <div className="App">
       <h2>FOODIE SPOT</h2>
+
+      
+
       { 
         title.map((v, i) => {
           return (
@@ -25,23 +25,10 @@ function App() {
                             copy[i] = copy[i] + 1;
                             setLike(copy)
                           }}>🥇</span>{like[i]}</p>
-              <button onClick={() => {
-                splice(startIndex, 제거할 개수)
-              }}>삭제</button>
             </div>
           )
         }) 
       }
-      <input onChange={(e)=>{setInputValue(e.target.value); /*console.log(inputValue)*/}}></input>
-      <button onClick={() => {
-        let ctitle = [...title];
-        let clike = [...like];
-        ctitle.unshift(inputValue);
-        clike.unshift(0)
-        setTitle(ctitle);
-        setLike(clike);
-      }}>글추가</button>
-
       { modal ? <Modal title={title} modalIndex={modalIndex} setTitle={setTitle} /> : null }  
     </div>
   );
