@@ -1,5 +1,5 @@
 import "./Editor.css";
-const Editor = () => {
+const Editor = ({onCreate}) => {
     return (
         <div className="editor">
             <input placeholder="새로운 Todo..." />
