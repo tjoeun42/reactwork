@@ -2,7 +2,7 @@ import './App.css';
 import Header from './component/Header';
 import Editor from './component/Editor';
 import List from './component/List';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 const tmpData = [
   {
@@ -28,15 +28,9 @@ const tmpData = [
 function App() {
   const [todos, setTodos] = useState(tmpData);
 
-  // id를 기존 데이터의 id번호 다음 번호로 세팅하기
-  /*
-    useRef() : React Hook 중 하나
-               컴포넌트가 리렌더링되더라도 값이 유지되는 컨테이너 역할을 함
-  */
-  const idRef = useRef(3);    // id가 0~2번까지 있어서 3번 부터 시작
   const onCreate = (content) => {
     const newItem = {
-      id : idRef.current++,
+      id : 0,
       isDone : false,
       content : content,
       date : new Date().getTime(),

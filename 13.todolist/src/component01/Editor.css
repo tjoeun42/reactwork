@@ -1,0 +1,18 @@
+.editor {
+    display: flex;
+    gap: 10px;
+}
+.editor input {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+.editor button {
+    cursor: pointer;
+    width: 80px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(57, 79, 20);
+    color: white;
+}
