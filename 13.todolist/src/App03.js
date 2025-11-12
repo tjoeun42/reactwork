@@ -24,13 +24,16 @@ const tmpData = [
     date : new Date().getTime(),
   }
 ];
-// 체크박스가 체크가 되게 하기
-//  isDone의 값이 true로 변경되야 함
 
 function App() {
   const [todos, setTodos] = useState(tmpData);
 
-  const idRef = useRef(3);
+  // id를 기존 데이터의 id번호 다음 번호로 세팅하기
+  /*
+    useRef() : React Hook 중 하나
+               컴포넌트가 리렌더링되더라도 값이 유지되는 컨테이너 역할을 함
+  */
+  const idRef = useRef(3);    // id가 0~2번까지 있어서 3번 부터 시작
   const onCreate = (content) => {
     const newItem = {
       id : idRef.current++,
@@ -39,21 +42,6 @@ function App() {
       date : new Date().getTime(),
     }
     setTodos([newItem, ...todos]);
-  }
-
-  const onUpdate = (targetId) => {
-    setTodos(todos.map( todo => {
-      if(todo.id === targetId) {
-        return {
-          ...todo,
-          isDone : !todo.isDone
-        }
-      }
-      return todo
-    }))
-
-    // 삼항 연산자로 바꾸면
-    // setTodos(todos.map(todo => todo.id === targetId ? {...todo, isDone : !todo.isDone} : todo))
   }
 
   return (
