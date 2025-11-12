@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+}
+.main-bg {
+  height : 500px;
+  /* background-image : url("./img/bgimg.jpg");   src/img폴더에 있을 때*/
+  background-image : url("../public/img/bgimg.jpg");  /* public/img폴더에 있을 때 */
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

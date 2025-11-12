@@ -5,13 +5,13 @@ import "./TodoItem.css";
 // const TodoItem = ({todos}) => { 사용시 : todos.id   todos.isDone 
 
 // 2. 로 넘어오고 객체분해할당으로 받으면
-const TodoItem = ({id, isDone, content, date, onUpdate, onDelete}) => {
+const TodoItem = ({id, isDone, content, date, onUpdate}) => {
     return (
         <div className="todoItem">
             <input type="checkbox" checked={isDone} onChange={()=>{onUpdate(id)}}/>
             <div className="content">{content}</div>
             <div className="date">{new Date(date).toLocaleDateString()}</div>
-            <button onClick={() => {onDelete(id)}}>삭제</button>
+            <button>삭제</button>
         </div>
     )
 }

@@ -4,7 +4,6 @@ import Editor from './component/Editor';
 import List from './component/List';
 import { useState, useRef } from 'react';
 
-// 삭제하기
 const tmpData = [
   {
     id : 0,
@@ -25,6 +24,8 @@ const tmpData = [
     date : new Date().getTime(),
   }
 ];
+// 체크박스가 체크가 되게 하기
+//  isDone의 값이 true로 변경되야 함
 
 function App() {
   const [todos, setTodos] = useState(tmpData);
@@ -40,19 +41,28 @@ function App() {
     setTodos([newItem, ...todos]);
   }
 
-  const onUpdate = targetId => {
+  const onUpdate = (targetId) => {
+    /*
+    setTodos(todos.map( todo => {
+      if(todo.id === targetId) {
+        return {
+          ...todo,
+          isDone : !todo.isDone
+        }
+      }
+      return todo
+    }))
+    */
+   
+    // 삼항 연산자로 바꾸면
     setTodos(todos.map(todo => todo.id === targetId ? {...todo, isDone : !todo.isDone} : todo))
-  }
-
-  const onDelete = targetId => {
-    setTodos(todos.filter(todo => todo.id != targetId))
   }
 
   return (
     <div className="App">
       <Header />
       <Editor onCreate={onCreate} />
-      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete}/>
+      <List todos={todos} onUpdate={onUpdate}/>
     </div>
   );
 }

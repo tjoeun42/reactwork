@@ -3,7 +3,7 @@ import "./List.css";
 import { useState } from 'react';
 
 // 검색하기
-const List = ({todos, onUpdate, onDelete}) => {
+const List = ({todos, onUpdate}) => {
     const [search, setSearch] = useState('');
 
     const getFilteredData = () => {
@@ -24,7 +24,7 @@ const List = ({todos, onUpdate, onDelete}) => {
             />
             <div className='todos_wrap'>
                 {  
-                    getFilteredData().map(todo => <TodoItem {...todo} onUpdate={onUpdate} onDelete={onDelete}/>)         
+                    getFilteredData().map(todo => <TodoItem {...todo} onUpdate={onUpdate}/>)         
                 }
             </div>
         </div>
