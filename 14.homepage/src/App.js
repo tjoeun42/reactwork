@@ -21,14 +21,6 @@ function App() {
   const [clothes, setClothes] = useState(pList);
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<div>Root 페이지임</div>} />
-        <Route path="/detail" element={<div>상세페이지임</div>} />
-        <Route path="/cart" element={<div>장바구니임</div>}/>
-      </Routes>
-
-
-
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
           <Navbar.Brand href="#home">Fashion Shop</Navbar.Brand>
@@ -38,20 +30,28 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
+      
 
-      <div className='main-bg' />
-
-      <Container>
-        <Row>
-          {
-            clothes.map((item, i) => {
-              return(
-                <PListCol clothes={item} key={i}/>
-              )
-            })
-          }
-        </Row>
-      </Container>
+      <Routes>
+        <Route path="/" element={
+          <>
+            <div className='main-bg' />
+            <Container>
+              <Row>
+                {
+                  clothes.map((item, i) => {
+                    return(
+                      <PListCol clothes={item} key={i}/>
+                    )
+                  })
+                }
+              </Row>
+            </Container>
+          </>
+        } />
+        <Route path="/detail" element={<div>상세페이지임</div>} />
+        <Route path="/cart" element={<div>장바구니임</div>}/>
+      </Routes>
     </div>
   );
 }
