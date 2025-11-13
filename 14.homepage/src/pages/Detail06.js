@@ -1,17 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button, Container, Row, Col, Nav } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-/*
-    전환 애니메이션 만들기
-    css에서 애니메이션 className하나 만들고
-    원할 때 className을 넣었다 빼면 애니메이션 기능
-    css에서
-        1) 애니메이션 동작 하기 전 스타일을 담을 className 만들기
-        2) 애니메이션 동작 한 후 스타일을 담을 className 만들기
-        3) transition 속성 추가
-    파일에서
-        4) 원할 때 className을 탈부착하면 됨
-*/
+
 function Detail(props) {
     let {pid} = useParams();
 
@@ -59,27 +49,37 @@ function Detail(props) {
                     <Nav.Link onClick={()=>{setTab(2)}}>버튼2</Nav.Link>
                 </Nav.Item>
             </Nav>
+            {/* 
+            tab == 0 이면 <div>내용0</div> 보이기
+            tab == 1 이면 <div>내용1</div> 보이기
+            tab == 2 이면 <div>내용2</div> 보이기 
+            */}
+            {/* 삼항 연산자로 */}
+            {/* { tab == 0 ? <div>내용0</div> : tab == 1 ? <div>내용1</div> : <div>내용2</div> }   */}
+
             <TabContent tab={tab}/>
         </div>  
     )
 }
 
+/*
+// if문으로 (컴포넌트에)
 function TabContent({tab}) {
-    const [fade, setFade] = useState('');
+    if(tab == 0) {
+        return <div>내용0</div>  
+    }
+    if(tab == 1) {
+        return <div>내용1</div>  
+    }
+    if(tab == 2) {
+        return <div>내용2</div>  
+    }
+}
+*/
 
-    useEffect(() => {
-        let end = setTimeout(() => {setFade('end')}, 100);
-        return () => {
-            clearTimeout(end);
-            setFade('');
-        }
-    }, [tab])
-
-    return (
-        <div className={`start ${fade}`}>
-            { [<h1>내용0</h1>, <h1>내용1</h1>, <h1>내용2</h1>][tab] }
-        </div>
-    )
+// if문 없이 배열로
+function TabContent({tab}) {
+    return [<h1>내용0</h1>, <h1>내용1</h1>, <h1>내용2</h1>][tab];
 }
 
 export default Detail;

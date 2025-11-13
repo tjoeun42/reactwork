@@ -9,6 +9,18 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.start {
+  opacity: 0;
+}
+
+.end {
+  opacity: 1;
+  transition: opacity 2s;
+}
+
+
+
 /* .detail {
   display: flex;
   justify-content: center;
