@@ -1,5 +1,6 @@
-import Table from 'react-bootstrap/Table';
-import { useSelector } from 'react-redux';
+import {Table, Button} from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeName } from '../store/store';
 
 function Cart() {
     // store에 있는 모든것 가져오기
@@ -12,8 +13,10 @@ function Cart() {
     let stock = useSelector(result => result.stock)
     console.log(stock);
 
+    let dispatch = useDispatch()
+
     return (
-        <div>
+        <div className='cart'>
             <br/>
             <h2>{result.user}의 CART LIST</h2>
             <br/>
@@ -28,12 +31,30 @@ function Cart() {
                     </tr>
                 </thead>
                 <tbody>
+{/*                     
                     <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>{stock[0]}</td>
+                        <td>{result.cart[0].id}</td>
+                        <td>{result.cart[0].name}</td>
+                        <td>{result.cart[0].count}</td>
                         <td>버튼</td>
                     </tr>
+                    <tr>
+                        <td>{result.cart[1].id}</td>
+                        <td>{result.cart[1].name}</td>
+                        <td>{result.cart[1].count}</td>
+                        <td>버튼</td>
+                    </tr>
+                     */}
+                    {
+                        result.cart.map(c =>
+                            <tr>
+                                <td>{c.id}</td>
+                                <td>{c.name}</td>
+                                <td>{c.count}</td>
+                                <td><Button variant="info" onClick={() => {dispatch(changeName())}}>이름 바꾸기</Button></td>
+                            </tr>
+                        )
+                    }
                 </tbody>
             </Table>
         </div>
