@@ -5,8 +5,6 @@ import pList from './data/ProductList';
 import { Route, Routes, Link, Navigate, useNavigate } from 'react-router-dom';
 import Detail from './pages/Detail';
 
-// ajax 사용하기
-// 설치하기 : npm install axios
 function App() {
   const [clothes, setClothes] = useState(pList);
   let navigate = useNavigate();
@@ -41,7 +39,22 @@ function App() {
             </Container>
           </>
         } />
+
+        {/*         
+        * url파라이터 사용
+          localhost:3000/detail/1   ->  받을 때 useParams()  : 주고 고정적인것 사용시
+
+          localhost:3000/detail?search=knit  -> 받을 때 useSearchParams()  : 변하는 값 사용시
+            let [params, SetParams] = useSearchParams()
+            params.get('search')
+
+          <Route path="/detail/:마음대로" element={<Detail clothes={clothes}/>} />
+       */}
+
         <Route path="/detail/:pid" element={<Detail clothes={clothes}/>} />
+        
+        {/* 값을 여러개 넘겨줄때 */}
+        {/* <Route path="/detail/:pid/:member" element={<Detail clothes={clothes}/>} /> */}
         <Route path="/cart" element={<div>장바구니임</div>}/>
         <Route path="*" element={<div>없는 페이지 입니다</div>} />
       </Routes>
