@@ -1,7 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Button, Container, Row, Col, Nav } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-
+/*
+    전환 애니메이션 만들기
+    css에서 애니메이션 className하나 만들고
+    원할 때 className을 넣었다 빼면 애니메이션 기능
+    css에서
+        1) 애니메이션 동작 하기 전 스타일을 담을 className 만들기
+        2) 애니메이션 동작 한 후 스타일을 담을 className 만들기
+        3) transition 속성 추가
+    파일에서
+        4) 원할 때 className을 탈부착하면 됨
+*/
 function Detail(props) {
     let {pid} = useParams();
 

@@ -1,8 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Button, Container, Row, Col, Nav } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-
+import { Context1 } from '../App';
 function Detail(props) {
+    /*
+    // useContext() : Context1를 해체해 준다.
+    let a = useContext(Context1);
+    console.log(a);
+    console.log(a.stock);
+    console.log(a.clothes);
+    */
+
+    // useContext()를 받으면 객체 분해 할당으로 받으면
+    let {stock, clothes} = useContext(Context1);
+    console.log(stock);
+    console.log(clothes);
+
     let {pid} = useParams();
 
     let findId = props.clothes.find(item => 
@@ -63,6 +76,8 @@ function Detail(props) {
 function TabContent({tab}) {
     const [fade, setFade] = useState('');
 
+    let {stock} = useContext(Context1);
+
     useEffect(() => {
         let end = setTimeout(() => {setFade('end')}, 100);
         return () => {
@@ -73,7 +88,7 @@ function TabContent({tab}) {
 
     return (
         <div className={`start ${fade}`}>
-            { [<h1>내용0</h1>, <h1>내용1</h1>, <h1>내용2</h1>][tab] }
+            { [<h1>{stock}</h1>, <h1>{stock[1]}</h1>, <h1>{stock[tab]}</h1>][tab] }
         </div>
     )
 }
