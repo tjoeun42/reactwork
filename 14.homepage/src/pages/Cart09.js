@@ -1,22 +1,21 @@
 import {Table, Button} from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeAge, changeName } from '../store/store';
+import { useSelector } from 'react-redux';
 
 function Cart() {
+    // store에 있는 모든것 가져오기
     let result = useSelector(result => result);
+    console.log(result);
+    console.log(result.user);
+    console.log(result.stock);
+
+    // store에서 원하는것만 가져오기
     let stock = useSelector(result => result.stock)
     console.log(stock);
-
-    // 값 변경하기
-    // 1. store에서 변경함수 만들기
-    // 2. 변경함수 내보내기
-    // 3. 만든함수 import하여 사용하기 (useDispatch() 함수 : store.js로 요청을 보내주는 함수)
-    let dispatch = useDispatch()
 
     return (
         <div className='cart'>
             <br/>
-            <h2>{result.user.name}의 CART LIST</h2>
+            <h2>{result.user}의 CART LIST</h2>
             <br/>
 
             <Table striped bordered hover>
@@ -29,13 +28,27 @@ function Cart() {
                     </tr>
                 </thead>
                 <tbody>
+{/*                     
+                    <tr>
+                        <td>{result.cart[0].id}</td>
+                        <td>{result.cart[0].name}</td>
+                        <td>{result.cart[0].count}</td>
+                        <td>버튼</td>
+                    </tr>
+                    <tr>
+                        <td>{result.cart[1].id}</td>
+                        <td>{result.cart[1].name}</td>
+                        <td>{result.cart[1].count}</td>
+                        <td>버튼</td>
+                    </tr>
+                     */}
                     {
                         result.cart.map(c =>
                             <tr>
                                 <td>{c.id}</td>
                                 <td>{c.name}</td>
                                 <td>{c.count}</td>
-                                <td><Button variant="info" onClick={() => {dispatch(changeAge(5))}}>+</Button></td>
+                                <td><Button variant="info">변경하기</Button></td>
                             </tr>
                         )
                     }

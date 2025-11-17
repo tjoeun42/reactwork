@@ -1,7 +1,18 @@
 import {configureStore, createSlice} from '@reduxjs/toolkit';
 
 /*
-    과제 : Cart.js에서 + 버튼을 누르면 수량 1씩 증가시키기
+    변경하는 값이 array/object인 경우
+*/
+/*
+let user = createSlice({
+    name : 'user',
+    initialState : {name :'kim', age:20},
+    reducers : {
+        changeName(n) {
+            return {name : 'park', age:20}
+        }
+    }
+})
 */
 let user = createSlice({
     name : 'user',
@@ -16,18 +27,6 @@ let user = createSlice({
     }
 })
 export let { changeAge, changeName } = user.actions
-/*
-let user = createSlice({
-    name : 'user',
-    initialState : {name :'kim', age:20},
-    reducers : {
-        changeName(n) {
-            return {name : 'park', age:20}
-        }
-    }
-})
-    */
-
 
 let stock = createSlice({
     name : 'stock',

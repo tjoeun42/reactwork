@@ -1,16 +1,18 @@
 import {Table, Button} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeAge, changeName } from '../store/store';
+import { changeName } from '../store/store';
 
 function Cart() {
     let result = useSelector(result => result);
     let stock = useSelector(result => result.stock)
     console.log(stock);
-
-    // 값 변경하기
-    // 1. store에서 변경함수 만들기
-    // 2. 변경함수 내보내기
-    // 3. 만든함수 import하여 사용하기 (useDispatch() 함수 : store.js로 요청을 보내주는 함수)
+/*
+    * 값 변경하기
+    1. store에서 변경함수 만들기
+    2. 변경함수 내보내기
+    3. 만든함수 import하여 사용하기 
+       (useDispatch() 함수 : store.js로 요청을 보내주는 함수)
+*/
     let dispatch = useDispatch()
 
     return (
@@ -35,7 +37,7 @@ function Cart() {
                                 <td>{c.id}</td>
                                 <td>{c.name}</td>
                                 <td>{c.count}</td>
-                                <td><Button variant="info" onClick={() => {dispatch(changeAge(5))}}>+</Button></td>
+                                <td><Button variant="info" onClick={() => {dispatch(changeName())}}>이름 바꾸기</Button></td>
                             </tr>
                         )
                     }

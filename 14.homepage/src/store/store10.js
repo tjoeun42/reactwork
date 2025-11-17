@@ -1,33 +1,24 @@
 import {configureStore, createSlice} from '@reduxjs/toolkit';
 
 /*
-    과제 : Cart.js에서 + 버튼을 누르면 수량 1씩 증가시키기
+  * 변경하기
+    reducers : {
+        함수명(기존의 값) {
+            return 변경값;
+        }
+    }
 */
 let user = createSlice({
     name : 'user',
-    initialState : {name :'kim', age:20},
-    reducers : {
-        changeAge(state, num) {  // 사용자로 부터 num에 해당하는 값을 받을 수 있음
-            state.age += num.payload;
-        },
-        changeName(state) {
-            state.name = 'park';
-        }
-    }
-})
-export let { changeAge, changeName } = user.actions
-/*
-let user = createSlice({
-    name : 'user',
-    initialState : {name :'kim', age:20},
+    initialState : 'tjoeun',
     reducers : {
         changeName(n) {
-            return {name : 'park', age:20}
+            return n + ' 3차'
         }
     }
 })
-    */
 
+export let { changeName } = user.actions
 
 let stock = createSlice({
     name : 'stock',
