@@ -1,10 +1,11 @@
 import {Table, Button} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeAge, changeName } from '../store/store';
+import { countIncrease } from '../store/store';
 
 function Cart() {
     let result = useSelector(result => result);
     let stock = useSelector(result => result.stock)
+
     let dispatch = useDispatch()
 
     return (
@@ -12,7 +13,6 @@ function Cart() {
             <br/>
             <h2>{result.user.name}의 CART LIST</h2>
             <br/>
-            <Button variant="info" onClick={() => {dispatch(changeName())}}>이름 바꾸기</Button>
 
             <Table striped bordered hover>
                 <thead>
@@ -25,12 +25,13 @@ function Cart() {
                 </thead>
                 <tbody>
                     {
-                        result.cart.map(c =>
+                        result.cart.map((c, i) =>
                             <tr>
                                 <td>{c.id}</td>
                                 <td>{c.name}</td>
                                 <td>{c.count}</td>
-                                <td><Button variant="info" onClick={() => {dispatch(changeAge(5))}}>나이변경</Button></td>
+                                {/* <td><Button variant="info" onClick={() => {dispatch(countIncrease(i))}}>+</Button></td> //배열 번호를 넘겨줌*/}
+                                <td><Button variant="info" onClick={() => {dispatch(countIncrease(c.id))}}>+</Button></td>
                             </tr>
                         )
                     }

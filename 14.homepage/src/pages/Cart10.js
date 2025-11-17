@@ -47,14 +47,3 @@ function Cart() {
     )
 }
 export default Cart;
-
-/*
-
-[
-    {id:1, name:'jacket', count:1}
-    {id:3, name:'knit', count:2}
-]
-장바구니에 위의 상품을 담았다
-store.js에서 넣어주고
-Cart.js 테이블에서 보여주기
-*/

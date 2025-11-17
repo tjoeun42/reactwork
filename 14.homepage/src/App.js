@@ -6,14 +6,33 @@ import { Route, Routes, Link, Navigate, useNavigate } from 'react-router-dom';
 import Detail from './pages/Detail';
 import axios from 'axios';
 import Cart from './pages/Cart';
-/*
-  2. Redux라는 외부 라이브러리
-     1) 설치 : npm i @reduxjs/toolkit react-redux
-     2) 공동으로 사용하는 js파일 만들기(src/store/store.js)
 
-    > Cart의 장바구니에 들어가 값들을 redex로 사용
-*/
 function App() {
+  // localStorage : 웹페이지에 있는 저장공간. 청소만 하지않으면 반영구적임
+  localStorage.setItem('addr', '한국빌딩');
+
+  // 배열이나 객체 사용 불가
+  // 대신 json의 형태로 넣을 수 있음
+  // let obj = {tel : '02-1111-2222'}  // 그냥 [Object, Object] 들어감
+  let obj = {tel : '02-1111-2222'}
+  let tel = JSON.stringify(obj)
+  localStorage.setItem('data', tel);
+
+  let user = {
+    name : 'kim',
+    age : 25,
+    hobbies : ['gaming', 'reading']
+  }
+  localStorage.setItem('user', JSON.stringify(user));
+
+  // 가져오기
+  let getUser = localStorage.getItem('user');
+  console.log(getUser)  //getUser.name 사용 불가
+
+  // 가져오면 json의 형태를 object의 형태로 바꿔줌
+  let o = JSON.parse(getUser)
+  console.log(o.name);
+
   const [clothes, setClothes] = useState(pList);
   const [clickCount, setClickCount] = useState(2);
   let navigate = useNavigate();

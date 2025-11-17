@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../store/store';
 
+// 과제 Detail.js에서 주문하기를 누르면 Cart에 담기
+
 function Detail(props) {
     let {pid} = useParams();
 
@@ -18,30 +20,6 @@ function Detail(props) {
             clearTimeout(timer);
         }
     })
-    /*
-    useEffect(() => {
-        let p = localStorage.getItem('recentProduct');  // json반환
-        p = JSON.parse(p)    // JSON을 객체로 변환
-        p.push(findId.id)   // 객체에서 사용하는 함수
-        localStorage.setItem('recentProduct', JSON.stringify(p))
-    }, [])
-    // 이렇게하면 같은 id가 중복하여 저장될 수 있음
-    */
-    useEffect(() => {
-        let p = localStorage.getItem('recentProduct');
-        p = JSON.parse(p)
-        /*  if문으로 중복 제거
-        if(!p.includes(findId.id)) {
-            p.push(findId.id)
-            localStorage.setItem('recentProduct', JSON.stringify(p))
-        }
-        */
-        // Set으로 중복제거
-        p.push(findId.id)
-        p = new Set(p)
-        p = Array.from(p)
-        localStorage.setItem('recentProduct', JSON.stringify(p))
-    }, [])
 
     let [tab, setTab] = useState(0);
 
@@ -88,39 +66,7 @@ function Detail(props) {
                 </Nav.Item>
             </Nav>
             <TabContent tab={tab}/>
-            <RecentViewed clothes={props.clothes} />
         </div>  
-    )
-}
-
-function RecentViewed({clothes}) {
-    const [recent, setRecent] = useState([]);
-
-    useEffect(() => {
-        let rp = JSON.parse(localStorage.getItem('recentProduct')) || [];
-        rp = rp.slice().reverse();
-        let products = rp.map(id => clothes.find(c => c.id == id))
-                         .filter(Boolean)
-        setRecent(products)
-    }, [clothes])
-
-    return (
-        <div>
-            <h4>⚆_⚆ 최근 본 상품</h4>
-            <div style={{display:'flex'}}>
-                {
-                    recent.map(item => (
-                        <div>
-                            <img src={`${process.env.PUBLIC_URL}/img/clothes${item.id}.png`} style={{width: '30%'}}/>
-                            <div>
-                                <strong>{item.title}</strong>
-                                <p>{item.price}원</p>
-                            </div>
-                        </div>
-                    ))
-                }
-            </div>
-        </div>
     )
 }
 
