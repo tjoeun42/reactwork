@@ -111,7 +111,7 @@ function RecentViewed({clothes}) {
                 {
                     recent.map(item => (
                         <div>
-                            <img src={`${process.env.PUBLIC_URL}/img/clothes${item.id}.png`} style={{width: '30%'}}/>
+                            <img src={`${process.env.PUBLIC_URL}/img/clothes${item.id}.png`} style={{width: '40%'}}/>
                             <div>
                                 <strong>{item.title}</strong>
                                 <p>{item.price}원</p>
