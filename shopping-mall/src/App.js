@@ -6,6 +6,7 @@ import { Route, Routes, Link, Navigate, useNavigate } from 'react-router-dom';
 import Detail from './pages/Detail';
 import axios from 'axios';
 import Cart from './pages/Cart';
+import Signup from './pages/Signup';
 
 function App() {
   const [clothes, setClothes] = useState(pList);
@@ -26,6 +27,7 @@ function App() {
           <Nav className="me-auto">
             <Nav.Link onClick={()=> {navigate('/')}}>Home</Nav.Link>
             <Nav.Link onClick={()=> {navigate('/cart')}}>Cart</Nav.Link>
+            <Nav.Link onClick={()=> {navigate('/signup')}}>Signup</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -60,6 +62,7 @@ function App() {
         } />
         <Route path="/detail/:pid" element={<Detail clothes={clothes}/>} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<div>없는 페이지 입니다</div>} />
       </Routes>
     </div>
