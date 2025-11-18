@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import {Container, Nav, Navbar, Row, Col, Button} from 'react-bootstrap';
 import pList from './data/ProductList';
@@ -11,6 +11,12 @@ function App() {
   const [clothes, setClothes] = useState(pList);
   const [clickCount, setClickCount] = useState(2);
   let navigate = useNavigate();
+
+  useEffect(() => {
+    if(!localStorage.getItem('recentProduct')) {
+      localStorage.setItem('recentProduct', JSON.stringify([]))
+    }
+  })
 
   return (
     <div className="App">
