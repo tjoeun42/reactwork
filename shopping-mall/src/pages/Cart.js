@@ -1,12 +1,19 @@
-import {Table, Button} from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { countIncrease } from '../store/store';
+import {Table} from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function Cart() {
-    let result = useSelector(result => result);
-    let stock = useSelector(result => result.stock)
+    const [list, setList] = useState([]);
 
-    let dispatch = useDispatch()
+    useEffect(() => {
+        axios.get('/react/getCart')
+             .then(result => {
+                setList(result.data);
+             })
+             .catch(() => {
+                console.log("실패");
+             })
+    }, []);
 
     return (
         <div className='cart'>
@@ -20,17 +27,15 @@ function Cart() {
                         <th>번호</th>
                         <th>상품명</th>
                         <th>수량</th>
-                        <th>변경하기</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        result.cart.map(c =>
+                        list.map(c =>
                             <tr>
                                 <td>{c.id}</td>
-                                <td>{c.name}</td>
+                                <td>{c.title}</td>
                                 <td>{c.count}</td>
-                                <td><Button variant="info" onClick={() => {dispatch(countIncrease(c.id))}}>+</Button></td>
                             </tr>
                         )
                     }

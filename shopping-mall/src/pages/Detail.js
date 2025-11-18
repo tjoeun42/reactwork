@@ -1,58 +1,37 @@
 import { useEffect, useState } from 'react';
 import { Button, Container, Row, Col, Nav } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { addItem } from '../store/store';
+import axios from 'axios';
 
 function Detail(props) {
     let {pid} = useParams();
+    let findId = props.clothes.find(item => item.id == pid)
+    
+    let [tab, setTab] = useState(0);
+    const [fade2, setFade2] = useState('start');
 
-    let findId = props.clothes.find(item => 
-       item.id == pid
-    )
-
+    const navigate = useNavigate();
     let [alert, setAlert] = useState(true);
+
     useEffect(() => {
         let timer = setTimeout(() => { setAlert(false)}, 2000);
         return() => {
             clearTimeout(timer);
         }
     })
-    /*
-    useEffect(() => {
-        let p = localStorage.getItem('recentProduct');  // json반환
-        p = JSON.parse(p)    // JSON을 객체로 변환
-        p.push(findId.id)   // 객체에서 사용하는 함수
-        localStorage.setItem('recentProduct', JSON.stringify(p))
-    }, [])
-    // 이렇게하면 같은 id가 중복하여 저장될 수 있음
-    */
+
     useEffect(() => {
         let p = localStorage.getItem('recentProduct');
         p = JSON.parse(p)
-        /*  if문으로 중복 제거
-        if(!p.includes(findId.id)) {
-            p.push(findId.id)
-            localStorage.setItem('recentProduct', JSON.stringify(p))
-        }
-        */
-        // Set으로 중복제거
         p.push(findId.id)
         p = new Set(p)
         p = Array.from(p)
         localStorage.setItem('recentProduct', JSON.stringify(p))
     }, [])
 
-    let [tab, setTab] = useState(0);
-
-    const [fade2, setFade2] = useState('start');
-
     useEffect(() => {
         setFade2(' end');
     }, [])
-
-    let dispatch = useDispatch()
-    const navigate = useNavigate();
 
     return (
         <div className={fade2}>
@@ -69,9 +48,15 @@ function Detail(props) {
                         <p>{findId.content}</p>
                         <p>{findId.price}원</p>
                         <Button variant="info" onClick={()=>{
-                            dispatch(addItem({id:findId.id, name:findId.title, count:1}));
-                            navigate('/Cart');
-                        }}>주문하기</Button>
+                            axios.post('/react/addCart', {id:findId.id, title:findId.title, count:1})
+                                 .then(result => {
+                                    console.log(result);
+                                    navigate('/Cart');
+                                 })
+                                 .catch(error => {
+                                    console.log("실패", error);
+                                 })
+                        }}>장바구니에 담기</Button>
                     </Col>
                 </Row>
             </Container>
