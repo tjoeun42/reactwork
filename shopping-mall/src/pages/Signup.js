@@ -63,10 +63,11 @@ const Signup = () => {
              })
              .catch(() => alert('회원가입 실패'))
     }
+
     return (
         <div style={style.container}>
             <h2 style={style.title}>회원가입</h2>
-            <Form style={style.form}>
+            <Form style={style.form} onSubmit={handleSubmit}>
                 <Form.Group as={Row} className="mb-3" >
                     <Form.Label column sm="2">EMAIL</Form.Label>
                     <Col sm="8">
