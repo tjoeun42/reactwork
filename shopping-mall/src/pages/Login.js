@@ -1,0 +1,73 @@
+import axios from "axios";
+import { useState } from "react";
+
+const Login = () => {
+    const [form, setForm] = useState({
+        email : '',
+        password : ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setForm({...form, [name] : value });
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.get('/react/login', form)
+             .then(res => {
+                if(res.data) {
+                    alert('로그인 성공');
+                    const userInfo = {
+                        name : res.data.name,
+                        email : res.data.email
+                    };
+                    localStorage.setItem('loginUser', JSON.stringify(userInfo));
+                    window.location.href = '/';
+                } else {
+                    alert('로그인 실패 : 이메일 또는 비밀번호가 맞지 않습니다.');
+                }
+             })
+             .catch(() => {
+                alert('로그인 오류 발생');
+             })
+    }
+
+    return (
+        <div style={style.container}>
+            <h2 style={style.title}>로 그 인</h2>
+            <Form style={style.form} onSubmit={handleSubmit}>
+                <Form.Group as={Row} className="mb-3" >
+                    <Form.Label column sm="2">EMAIL</Form.Label>
+                    <Col sm="10">
+                    <Form.Control type="email" name="email" onChange={handleChange} required/>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3" >
+                    <Form.Label column sm="2">PASSWORD</Form.Label>
+                    <Col sm="10">
+                    <Form.Control type="password" name="password" onChange={handleChange} required/>
+                    </Col>
+                </Form.Group>
+                <Button type="submit">로그인</Button>
+            </Form>
+        </div>
+    )
+}
+
+const style = {
+    container : {
+        textAlign : 'center',
+        marginTop : '40px',
+    },
+    title : {
+        textAlign: 'center',
+        marginBottom : '20px'
+    },
+    form : {
+        margin: '0 auto',
+        width : '80%'
+    }
+}
+
+export default Login;
