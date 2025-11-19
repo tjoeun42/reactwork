@@ -30,7 +30,7 @@ const Signup = () => {
     const [isEmailChecked, setIsEmailChecked] = useState(false);
     const [showPostcode, setShowPostcode] = useState(false)
     const checkEmail = () => {
-        axios.get('/react/email-check', {params: {email:form.email}})
+        axios.get('http://localhost:8080/react/email-check', {params: {email:form.email}})
              .then(result => {
                 if(result.data) {
                     setEmailCheckMessage('사용 가능한 이메일 입니다.');
@@ -56,7 +56,7 @@ const Signup = () => {
             alert("이메일 중복 확인을 해주세요.");
             return;
         }
-        axios.post('/react/signup', form)
+        axios.post('http://localhost:8080/react/signup', form)
              .then(() => {
                 alert('회원가입 성공');
                 window.location.href = '/';

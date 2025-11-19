@@ -48,14 +48,26 @@ function Detail(props) {
                         <p>{findId.content}</p>
                         <p>{findId.price}원</p>
                         <Button variant="info" onClick={()=>{
-                            axios.post('/react/addCart', {id:findId.id, title:findId.title, count:1})
-                                 .then(result => {
-                                    console.log(result);
-                                    navigate('/Cart');
-                                 })
-                                 .catch(error => {
-                                    console.log("실패", error);
-                                 })
+                            const user = JSON.parse(sessionStorage.getItem('loginUser'));
+
+                            if(!user) {
+                                alert("로그인 후 사용가능합니다.");
+                                navigate('/login');
+                                return;
+                            }
+                            axios.post('http://localhost:8080/react/addCart', {
+                                id:findId.id, 
+                                title:findId.title, 
+                                count:1,
+                                memId : user.email 
+                            })
+                            .then(result => {
+                            console.log(result);
+                            navigate('/Cart');
+                            })
+                            .catch(error => {
+                            console.log("실패", error);
+                            })
                         }}>장바구니에 담기</Button>
                     </Col>
                 </Row>

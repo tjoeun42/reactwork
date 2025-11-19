@@ -6,7 +6,14 @@ function Cart() {
     const [list, setList] = useState([]);
 
     useEffect(() => {
-        axios.get('/react/getCart')
+        const user = JSON.parse(sessionStorage.getItem('loginUser'));
+
+        if(!user) {
+            console.log('로그인 후 사용');
+            return;
+        }
+
+        axios.get('http://localhost:8080/react/getCart', {params:{memId: user.email}})
              .then(result => {
                 setList(result.data);
              })
