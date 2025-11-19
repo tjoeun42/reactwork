@@ -62,11 +62,12 @@ function Detail(props) {
                                 memId : user.email 
                             })
                             .then(result => {
-                            console.log(result);
-                            navigate('/Cart');
+                                if(result.data == "ok") {
+                                    navigate('/Cart');
+                                } 
                             })
                             .catch(error => {
-                            console.log("실패", error);
+                                console.log("실패", error);
                             })
                         }}>장바구니에 담기</Button>
                     </Col>
