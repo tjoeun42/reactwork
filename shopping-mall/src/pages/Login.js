@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import {Form, Row, Col, Button} from 'react-bootstrap';
 
 const Login = () => {
     const [form, setForm] = useState({
@@ -14,7 +15,7 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.get('/react/login', form)
+        axios.post('/react/login', form)
              .then(res => {
                 if(res.data) {
                     alert('로그인 성공');
@@ -22,7 +23,7 @@ const Login = () => {
                         name : res.data.name,
                         email : res.data.email
                     };
-                    localStorage.setItem('loginUser', JSON.stringify(userInfo));
+                    sessionStorage.setItem('loginUser', JSON.stringify(userInfo));
                     window.location.href = '/';
                 } else {
                     alert('로그인 실패 : 이메일 또는 비밀번호가 맞지 않습니다.');

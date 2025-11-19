@@ -7,10 +7,14 @@ import Detail from './pages/Detail';
 import axios from 'axios';
 import Cart from './pages/Cart';
 import Signup from './pages/Signup';
+import Login from './pages/Login';
+
 
 function App() {
   const [clothes, setClothes] = useState(pList);
   const [clickCount, setClickCount] = useState(2);
+  const [loginUser, setLoginUser] = useState(null);
+
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -18,6 +22,13 @@ function App() {
       localStorage.setItem('recentProduct', JSON.stringify([]))
     }
   })
+
+  useEffect(() => {
+    const user = sessionStorage.getItem('loginUser');
+    if(user) {
+      setLoginUser(JSON.parse(user))
+    }
+  }, []);
 
   return (
     <div className="App">
@@ -28,6 +39,23 @@ function App() {
             <Nav.Link onClick={()=> {navigate('/')}}>Home</Nav.Link>
             <Nav.Link onClick={()=> {navigate('/cart')}}>Cart</Nav.Link>
             <Nav.Link onClick={()=> {navigate('/signup')}}>Signup</Nav.Link>
+            <Nav.Link onClick={()=> {
+              if(loginUser) {
+                sessionStorage.removeItem('loginUser');
+                setLoginUser(null);
+                navigate('/');
+              } else {
+                navigate('/login');
+              }
+              }}>{loginUser ? 'Logout' : 'Login'} 
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            {loginUser && (
+              <Navbar.Text style={{color:'white'}}>
+                {loginUser.name}님 로그인 상태
+              </Navbar.Text>
+            )}
           </Nav>
         </Container>
       </Navbar>
@@ -63,6 +91,7 @@ function App() {
         <Route path="/detail/:pid" element={<Detail clothes={clothes}/>} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<div>없는 페이지 입니다</div>} />
       </Routes>
     </div>
