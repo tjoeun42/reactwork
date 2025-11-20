@@ -13,7 +13,7 @@ function Cart() {
             return;
         }
 
-        axios.get('http://localhost:8080/react/getCart', {params:{memId: user.email}})
+        axios.get('/react/getCart', {params:{memId: user.email}})
              .then(result => {
                 setList(result.data);
              })

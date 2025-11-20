@@ -15,7 +15,7 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8080/react/login', form)
+        axios.post('/react/login', form)
              .then(res => {
                 if(res.data) {
                     alert('로그인 성공');

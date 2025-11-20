@@ -55,7 +55,7 @@ function Detail(props) {
                                 navigate('/login');
                                 return;
                             }
-                            axios.post('http://localhost:8080/react/addCart', {
+                            axios.post('/react/addCart', {
                                 id:findId.id, 
                                 title:findId.title, 
                                 count:1,
